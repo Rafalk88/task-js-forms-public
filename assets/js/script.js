@@ -1,6 +1,12 @@
+document.addEventListener('DOMContentLoaded', init)
+
+function init() {
+
 const uploader = document.querySelector('.uploader__input')
 const ulEl = document.querySelector('.panel__excursions')
 const liEl = document.querySelector('.excursions__item')
+let pricesTable = [] // dane o cenach oferty
+let numberOfPeopleTable = [] // dane o liczbie osób
 
 uploader.addEventListener('change', readFile)
 
@@ -45,9 +51,61 @@ function createOffer(offerInfo) {
         const prices = newLi.querySelectorAll('.excursions__price')
         prices[0].innerText = newOffer[7]
         prices[1].innerText = newOffer[9]
-
+       
         ulEl.appendChild(newLi)
 
+        const inputs = newLi.querySelectorAll('.excursions__field-input')
+        inputs.forEach(getNumberOfTickets)
+
     })
+
+}
+
+function getNumberOfTickets(e) {
+    
+    if (e.type === 'text') {
+        
+        e.addEventListener('change', function(e) {
+        
+            e.preventDefault()
+            
+            if (e.target.name === 'adults') {
+
+                const adultNumber = e.target.value
+                pricesTable.push(Number(e.target.previousElementSibling.innerText))
+                numberOfPeopleTable.push(Number(adultNumber))
+
+            } else if (e.target.name === 'children') {
+
+                const childrenNumber = e.target.value
+                pricesTable.push(Number(e.target.previousElementSibling.innerText))
+                numberOfPeopleTable.push(Number(childrenNumber))
+                
+            }
+
+        })
+        
+    } else if (e.type === 'submit') {
+
+        e.addEventListener('click', function(e) {
+
+            e.preventDefault()
+            setSummary(pricesTable, numberOfPeopleTable)
+
+            // czyszczenie tablicy, aby były tam tylko dane z konkretnej oferty
+            pricesTable = []
+            numberOfPeopleTable = []
+
+        })
+
+    }
+
+}
+
+function setSummary(price, number) {
+
+    console.log(price, number)
+
+}
 
 }

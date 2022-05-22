@@ -10,7 +10,7 @@
 
 Zdobyliśmy zlecenie, które zostało porzucone przez poprzedniego programistę. Polega ono na składaniu zamówienia na wycieczki importowane z [pliku CSV](https://pl.wikipedia.org/wiki/CSV_(format_pliku)).
 
-Część kodu HTML i CSS już napisano. Naszym zadaniem jest utworzenie logiki i wyglądu. 
+Część kodu HTML i CSS już napisano. Naszym zadaniem jest utworzenie logiki i wyglądu. liczba osób
 
 To oznacza, że tym razem nie tylko działamy w JavaScripcie, ale musimy też ostylować poszczególne elementy według własnego uznania, aby lepiej się prezentowały.
 
