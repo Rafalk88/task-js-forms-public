@@ -5,6 +5,8 @@ function init() {
 const uploader = document.querySelector('.uploader__input')
 const ulEl = document.querySelector('.panel__excursions')
 const liEl = document.querySelector('.excursions__item')
+const summaryUlEl = document.querySelector('.panel__summary')
+const summaryLiEl = document.querySelector('.summary__item')
 let pricesTable = [] // dane o cenach oferty
 let numberOfPeopleTable = [] // dane o liczbie osób
 
@@ -104,7 +106,10 @@ function getNumberOfTickets(e) {
 
 function setSummary(price, number) {
 
-    console.log(price, number)
+    const newSummaryLiEl = summaryLiEl.cloneNode(true)
+    newSummaryLiEl.classList.remove('summary__item--prototype')
+    summaryUlEl.appendChild(newSummaryLiEl)
+    console.log(newSummaryLiEl)
 
 }
 
