@@ -7,8 +7,17 @@ const ulEl = document.querySelector('.panel__excursions')
 const liEl = document.querySelector('.excursions__item')
 const summaryUlEl = document.querySelector('.panel__summary')
 const summaryLiEl = document.querySelector('.summary__item')
-let pricesTable = [] // dane o cenach oferty
-let numberOfPeopleTable = [] // dane o liczbie osób
+
+let inputReset = [] // tablica z inputami. Po kliknięciu w submit inputy się resetują
+let offerObj = {
+
+    name: '',
+    adultPrice: '',
+    childrenPrice: '',
+    numberOfAdults: '',
+    numberOfChildren: '',
+
+}
 
 uploader.addEventListener('change', readFile)
 
@@ -64,26 +73,35 @@ function createOffer(offerInfo) {
 }
 
 function getNumberOfTickets(e) {
-    
+
     if (e.type === 'text') {
         
-        e.addEventListener('change', function(e) {
+        e.addEventListener('input', function(e) {
         
             e.preventDefault()
+
+            if (offerObj.name === '') {
+
+                offerObj.name = e.target.parentElement.parentElement.parentElement.parentElement.children[0].children[0].innerText
+
+            }
             
             if (e.target.name === 'adults') {
 
                 const adultNumber = e.target.value
-                pricesTable.push(Number(e.target.previousElementSibling.innerText))
-                numberOfPeopleTable.push(Number(adultNumber))
+                inputReset.push(e.target)
+                offerObj.adultPrice = Number(e.target.previousElementSibling.innerText)
+                offerObj.numberOfAdults = Number(adultNumber)
 
             } else if (e.target.name === 'children') {
 
                 const childrenNumber = e.target.value
-                pricesTable.push(Number(e.target.previousElementSibling.innerText))
-                numberOfPeopleTable.push(Number(childrenNumber))
+                inputReset.push(e.target)
+                offerObj.childrenPrice = Number(e.target.previousElementSibling.innerText)
+                offerObj.numberOfChildren = Number(childrenNumber)
                 
             }
+           
 
         })
         
@@ -92,11 +110,22 @@ function getNumberOfTickets(e) {
         e.addEventListener('click', function(e) {
 
             e.preventDefault()
-            setSummary(pricesTable, numberOfPeopleTable)
+            setSummary()
 
             // czyszczenie tablicy, aby były tam tylko dane z konkretnej oferty
-            pricesTable = []
-            numberOfPeopleTable = []
+            offerObj = {
+
+                name: '',
+                adultPrice: '',
+                childrenPrice: '',
+                numberOfAdults: '',
+                numberOfChildren: '',
+            
+            }
+
+            // czyszczenie inputów
+            inputReset[0].value = ''
+            inputReset[1].value = ''
 
         })
 
@@ -104,12 +133,24 @@ function getNumberOfTickets(e) {
 
 }
 
-function setSummary(price, number) {
-
+function setSummary() {
     const newSummaryLiEl = summaryLiEl.cloneNode(true)
     newSummaryLiEl.classList.remove('summary__item--prototype')
+
+    newSummaryLiEl.children[0].children[0].innerText = `${offerObj.name}:`
+    const summPrice = ((offerObj.adultPrice * offerObj.numberOfAdults) + (offerObj.childrenPrice * offerObj.numberOfChildren))
+    newSummaryLiEl.children[0].children[1].innerText = `${summPrice} PLN`
+    newSummaryLiEl.lastElementChild.innerText = `dorośli: ${offerObj.numberOfAdults} x ${offerObj.adultPrice}PLN, dzieci: ${offerObj.numberOfChildren} x ${offerObj.childrenPrice}PLN`
     summaryUlEl.appendChild(newSummaryLiEl)
-    console.log(newSummaryLiEl)
+
+    newSummaryLiEl.children[0].children[2].addEventListener('click', removeSummaryOffer)
+}
+
+function removeSummaryOffer(e) {
+
+    e.preventDefault()
+    const li = e.target.parentElement.parentElement
+    li.remove()
 
 }
 
