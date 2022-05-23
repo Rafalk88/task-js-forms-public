@@ -2,14 +2,17 @@ document.addEventListener('DOMContentLoaded', init)
 
 function init() {
 
-const uploader = document.querySelector('.uploader__input')
-const ulEl = document.querySelector('.panel__excursions')
-const liEl = document.querySelector('.excursions__item')
-const summaryUlEl = document.querySelector('.panel__summary')
-const summaryLiEl = document.querySelector('.summary__item')
+// selektory
+const uploader = document.querySelector('.uploader__input') // button 'wybierz plik'
+const ulEl = document.querySelector('.panel__excursions') // ul z elementu oferty
+const liEl = document.querySelector('.excursions__item') // li elementu ul elementu oferty
+const summaryUlEl = document.querySelector('.panel__summary') // ul panelu zamówienie
+const summaryLiEl = document.querySelector('.summary__item') // li z ul panelu zamówienie
+const panelOrder = document.querySelector('.panel__order') // element zamawiam
 
+// zmienne
 let inputReset = [] // tablica z inputami. Po kliknięciu w submit inputy się resetują
-let offerObj = {
+let offerObj = { // obiekt do przenoszenia wartości oferty
 
     name: '',
     adultPrice: '',
@@ -18,8 +21,21 @@ let offerObj = {
     numberOfChildren: '',
 
 }
+let summPrice // zmienna do obliczenia sumy oferty
+let orderPrice = panelOrder.children[0].firstElementChild.innerText = 0 // domyśla wartość całości zamówienia
+const orderBtn = panelOrder.children[3] // button zamawiam wycieczkę
 
+prepareOrderPrice()
 uploader.addEventListener('change', readFile)
+orderBtn.addEventListener('click', order)
+
+function prepareOrderPrice () { // przygotowuje cenę 'razem:' do dodania poszczególnych ofert
+
+    const spanEl = document.createElement('span')
+    spanEl.innerText = 'PLN'
+    panelOrder.children[0].lastElementChild.appendChild(spanEl)
+
+}
 
 function readFile(e) {
 
@@ -138,19 +154,42 @@ function setSummary() {
     newSummaryLiEl.classList.remove('summary__item--prototype')
 
     newSummaryLiEl.children[0].children[0].innerText = `${offerObj.name}:`
-    const summPrice = ((offerObj.adultPrice * offerObj.numberOfAdults) + (offerObj.childrenPrice * offerObj.numberOfChildren))
+    summPrice = ((offerObj.adultPrice * offerObj.numberOfAdults) + (offerObj.childrenPrice * offerObj.numberOfChildren))
     newSummaryLiEl.children[0].children[1].innerText = `${summPrice} PLN`
     newSummaryLiEl.lastElementChild.innerText = `dorośli: ${offerObj.numberOfAdults} x ${offerObj.adultPrice}PLN, dzieci: ${offerObj.numberOfChildren} x ${offerObj.childrenPrice}PLN`
     summaryUlEl.appendChild(newSummaryLiEl)
 
     newSummaryLiEl.children[0].children[2].addEventListener('click', removeSummaryOffer)
+
+    //dodaje sumę wycieczki do sumy końcowej
+    orderPrice += summPrice
+    panelOrder.children[0].firstElementChild.innerText = orderPrice
+    prepareOrderPrice()
 }
 
 function removeSummaryOffer(e) {
 
     e.preventDefault()
     const li = e.target.parentElement.parentElement
+    
+    const re = /[0-9]+/gm
+    const price = li.querySelector('.summary__total-price').innerText
+    const priceToRemove = price.match(re)
     li.remove()
+
+    //odejmuje sumę wycieczki od sumy końcowej
+    orderPrice -= Number(priceToRemove[0])
+    panelOrder.children[0].firstElementChild.innerText = orderPrice
+    prepareOrderPrice()
+
+}
+
+function order(e) {
+
+    e.preventDefault()
+    const inputNameAndLastName = panelOrder.children[1] // button zamawiam wycieczkę
+    const inputEmail = panelOrder.children[2] // button zamawiam wycieczkę
+    console.log('Zamówienie poszło!')
 
 }
 
