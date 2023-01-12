@@ -4,6 +4,7 @@ function init() {
   // constants
   const SUMM_PRICE = " PLN";
   const FILE_READER_ERROR_MESSAGE = "Sth not woring!";
+  const NO_ORDER_VALUE_MESSAGE = "Your order is 0!. Please order something.";
 
   // selektory
   const uploader = document.querySelector(".uploader__input"); // button 'wybierz plik'
@@ -174,6 +175,13 @@ function init() {
 
   function order(e) {
     e.preventDefault();
+    //wyczyść błędy
+    const ulErrEl = panelOrder.querySelector(".order__field-error_list");
+    if (ulErrEl) {
+      errors.length = 0;
+      ulErrEl.remove();
+    }
+
     validateForm();
 
     // tworzymy ul dla wyświetlenia błędów formularza
@@ -183,9 +191,13 @@ function init() {
     errorsUlEl.innerText = "";
 
     if (errors.length === 0) {
-      alert(
-        `Dziękujemy za złożenie zamówienia o wartości ${orderPrice} PLN. Szczegóły zamówienia zostały wysłane na adres e-mail: ${panelOrder[1].value}.`
-      );
+      if (orderPrice !== 0) {
+        alert(
+          `Dziękujemy za złożenie zamówienia o wartości ${orderPrice} PLN. Szczegóły zamówienia zostały wysłane na adres e-mail: ${panelOrder[1].value}.`
+        );
+      } else {
+        alert(NO_ORDER_VALUE_MESSAGE);
+      }
     } else {
       errors.forEach(function (text) {
         const errorLiEl = document.createElement("li");
