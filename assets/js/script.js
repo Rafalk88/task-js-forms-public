@@ -185,13 +185,6 @@ function init() {
     validateForm();
 
     // tworzymy ul dla wyświetlenia błędów formularza
-    const errorsUlEl = document.createElement("ul");
-    errorsUlEl.classList.add("order__field-error_list");
-    panelOrder
-      .querySelector(".order__field:nth-child(3)")
-      .appendChild(errorsUlEl);
-    errorsUlEl.innerText = "";
-
     if (errors.length === 0) {
       if (orderPrice !== 0) {
         alert(
@@ -201,6 +194,13 @@ function init() {
         alert(NO_ORDER_VALUE_MESSAGE);
       }
     } else {
+      const errorsUlEl = document.createElement("ul");
+      errorsUlEl.classList.add("order__field-error_list");
+      panelOrder
+        .querySelector(".order__field:nth-child(3)")
+        .appendChild(errorsUlEl);
+      errorsUlEl.innerText = "";
+
       errors.forEach(function (text) {
         const errorLiEl = document.createElement("li");
         errorLiEl.innerText = text;
@@ -242,9 +242,7 @@ function init() {
       }
 
       if (object.pattern) {
-        const reg = new RegExp(object.pattern);
-
-        if (!reg.test(value)) {
+        if (!object.pattern.test(value)) {
           errors.push(
             `Dane w polu ${object.label} muszą być zgodne ze wzorem: account_name@server_address`
           );
