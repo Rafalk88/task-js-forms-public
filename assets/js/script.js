@@ -159,7 +159,7 @@ function init() {
 
   function removeSummaryOffer(e) {
     e.preventDefault();
-    const li = e.target.parentElement.parentElement;
+    const li = e.target.parentElement.parentElement.parentElement;
 
     const re = /[0-9]+/gm;
     const price = li.querySelector(".summary__total-price").innerText;
