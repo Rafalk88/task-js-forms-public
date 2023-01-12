@@ -187,7 +187,9 @@ function init() {
     // tworzymy ul dla wyświetlenia błędów formularza
     const errorsUlEl = document.createElement("ul");
     errorsUlEl.classList.add("order__field-error_list");
-    panelOrder.appendChild(errorsUlEl);
+    panelOrder
+      .querySelector(".order__field:nth-child(3)")
+      .appendChild(errorsUlEl);
     errorsUlEl.innerText = "";
 
     if (errors.length === 0) {

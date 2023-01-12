@@ -167,6 +167,10 @@
 
 .order__field-error_list {
     margin-top: 0.938rem;
+    background-color: var(--white);
+        border: none;
+        border-radius: 0.313rem;
+        padding: 0.626rem;
 }
 
 .order__field-error_item {
