@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>JavaScript: Formularze - devmentor.pl</title>
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/theme.css" />
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/global.css" />
+    <link rel="stylesheet" href="./assets/css/mobile.css" />
+    <link rel="stylesheet" media="(min-width: 768px)" href="./assets/css/tablet.css">
+    <link rel="stylesheet" media="(min-width: 768px)" href="./assets/css/desktop.css">
   </head>
   <body>
     <section class="panel">
@@ -35,7 +40,7 @@
             <div class="excursions__field excursions__field--submit">
               <input
                 class="excursions__field-input excursions__field-input--submit"
-                value="dodaj do zamówinia"
+                value="Dodaj do zamówienia"
                 type="submit"
               />
             </div>
@@ -43,12 +48,12 @@
         </li>
       </ul>
       <section class="panel__form">
-        <div class="panel__uploader uploader">
+        <article class="panel__uploader uploader">
           <label class="uploader__label">
             Wybierz plik do wczytania wycieczek:
             <input class="uploader__input" type="file" accept=".csv" />
           </label>
-        </div>
+        </article>
         <form class="panel__order order" novalidate>
           <div class="order__total-price">
             Razem:
@@ -61,13 +66,13 @@
           </div>
           <div class="order__field">
             <label class="order__field-name">
-              Email <input class="order__field-input" name="email" />
+              Email: <input class="order__field-input" name="email" />
             </label>
           </div>
           <div class="order__field order__field--submit">
             <input
               class="order__field-input order__field-submit"
-              value="zamawiam"
+              value="Zamawiam"
               type="submit"
             />
           </div>
@@ -75,9 +80,13 @@
         <ul class="panel__summary summary">
           <li class="summary__item summary__item--prototype">
             <h3 class="summary__title">
-              <span class="summary__name">Ogrodzieniec</span>
+              <div class="summary__title-wrapper">
+                <span class="summary__name">Ogrodzieniec</span>
               <strong class="summary__total-price">199PLN</strong>
-              <a href="" class="summary__btn-remove" title="usuń">X</a>
+              </div>
+              <div class="summary__btn">
+                <a href="" class="summary__btn-remove" title="usuń">X</a>
+              </div>
             </h3>
             <p class="summary__prices">dorośli: 1 x 99PLN, dzieci: 2 x 50PLN</p>
           </li>

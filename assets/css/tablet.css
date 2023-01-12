@@ -1,0 +1,17 @@
+@media(min-width: 768px) {
+  .panel {
+    flex-direction: row;
+  }
+
+  .panel__excursions {
+    width: 50%;
+  }
+
+  .panel__form {
+    width: 50%;
+  }
+
+  .excursions__item {
+    height: auto;
+  }
+}

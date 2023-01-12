@@ -1,0 +1,16 @@
+:root {
+  --dark-blue-bgcolor: rgba(5, 25, 55, 0.2);
+  --light-red-shadow: rgba(245, 151, 142, 1);
+  --light-red-btn-bgcolor: rgba(242, 69, 55, 1);
+  --red: rgba(208, 39, 24, 1);
+  --white: rgba(255, 255, 255, 1);
+  --red-btn-hover: rgba(198, 45, 31, 1);
+  --light-grey: rgba(204, 204, 204, 1);
+  --black: rgba(0, 0, 0, 1);
+  --dark-grey-shadow: rgba(66, 66, 66, 0.75);
+  --light-green-btn: rgba(168, 235, 18, 1);
+  --dark-grey-btn: rgba(34, 34, 34, 1);
+  --black-shadow: rgba(0, 0, 0, 0.2);
+  --light-green-btn-hover: rgba(134, 188, 14, 1);
+  --dark-blue: rgba(5, 25, 55, 0.2);
+}

@@ -1,0 +1,27 @@
+@media(min-width: 1024px) {
+  .panel__excursions {
+    width: 70%;
+  }
+
+  .panel__form {
+    width: 30%;
+  }
+
+  .excursions__item {
+    width: calc(50% - 1.25rem);
+    height: 100%;
+  }
+
+  .excursions__field-input,
+  .excursions__field>.excursions__field-input {
+    width: auto;
+  }
+
+  .excursions__field--submit {
+    width: auto;
+  }
+
+  .order__field--submit>input {
+    width: 145px;
+  }
+}
