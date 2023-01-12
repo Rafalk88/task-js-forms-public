@@ -227,7 +227,7 @@ function init() {
       {
         name: "email",
         label: "Email",
-        pattern: "/^[a-zd]+[wd.-]*@(?:[a-zd]+[a-zd-]+.){1,5}[a-z]{2,6}$/i",
+        pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
       },
     ];
 
